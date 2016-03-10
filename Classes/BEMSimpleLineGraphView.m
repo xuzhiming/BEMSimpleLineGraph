@@ -24,7 +24,7 @@ const CGFloat BEMNullGraphValue = CGFLOAT_MAX;
 typedef NS_ENUM(NSInteger, BEMInternalTags)
 {
     DotFirstTag100 = 100,
-    DotLastTag1000 = 1000,
+    DotLastTag1000 = 10000,
     LabelYAxisTag2000 = 2000,
     BackgroundYAxisTag2100 = 2100,
     BackgroundXAxisTag2200 = 2200,
@@ -134,6 +134,10 @@ typedef NS_ENUM(NSInteger, BEMInternalTags)
     self = [super initWithCoder:coder];
     if (self) [self commonInit];
     return self;
+}
+
+-(void)awakeFromNib{
+    [self commonInit];
 }
 
 - (void)commonInit {
@@ -360,11 +364,11 @@ typedef NS_ENUM(NSInteger, BEMInternalTags)
                 
                 NSString *prefix = @"";
                 NSString *suffix = @"";
-                if ([self.delegate respondsToSelector:@selector(popUpSuffixForlineGraph:)]) {
-                    suffix = [self.delegate popUpSuffixForlineGraph:self];
+                if ([self.delegate respondsToSelector:@selector(popUpSuffixForlineGraph:index:)]) {
+                    suffix = [self.delegate popUpSuffixForlineGraph:self index:0];
                 }
-                if ([self.delegate respondsToSelector:@selector(popUpPrefixForlineGraph:)]) {
-                    prefix = [self.delegate popUpPrefixForlineGraph:self];
+                if ([self.delegate respondsToSelector:@selector(popUpPrefixForlineGraph:index:)]) {
+                    prefix = [self.delegate popUpPrefixForlineGraph:self index:0];
                 }
                 
                 NSString *fullString = [NSString stringWithFormat:@"%@%@%@", prefix, longestString, suffix];
@@ -1090,13 +1094,14 @@ typedef NS_ENUM(NSInteger, BEMInternalTags)
     NSString *prefix = @"";
     NSString *suffix = @"";
     
-    if ([self.delegate respondsToSelector:@selector(popUpSuffixForlineGraph:)])
-        suffix = [self.delegate popUpSuffixForlineGraph:self];
-
-    if ([self.delegate respondsToSelector:@selector(popUpPrefixForlineGraph:)])
-        prefix = [self.delegate popUpPrefixForlineGraph:self];
-
     int index = (int)(circleDot.tag - DotFirstTag100);
+
+    if ([self.delegate respondsToSelector:@selector(popUpSuffixForlineGraph:index:)])
+        suffix = [self.delegate popUpSuffixForlineGraph:self index:index];
+
+    if ([self.delegate respondsToSelector:@selector(popUpPrefixForlineGraph:index:)])
+        prefix = [self.delegate popUpPrefixForlineGraph:self index:index];
+
     NSNumber *value = dataPoints[index]; // @((NSInteger) circleDot.absoluteValue)
     NSString *formattedValue = [NSString stringWithFormat:self.formatStringForValues, value.doubleValue];
     permanentPopUpLabel.text = [NSString stringWithFormat:@"%@%@%@", prefix, formattedValue, suffix];
@@ -1392,8 +1397,8 @@ typedef NS_ENUM(NSInteger, BEMInternalTags)
     
     CGPoint popUpViewCenter = CGPointZero;
     
-    if ([self.delegate respondsToSelector:@selector(popUpSuffixForlineGraph:)])
-        self.popUpLabel.text = [NSString stringWithFormat:@"%li%@", (long)[dataPoints[(NSInteger) closestDot.tag - DotFirstTag100] integerValue], [self.delegate popUpSuffixForlineGraph:self]];
+    if ([self.delegate respondsToSelector:@selector(popUpSuffixForlineGraph:index:)])
+        self.popUpLabel.text = [NSString stringWithFormat:@"%li%@", (long)[dataPoints[(NSInteger) closestDot.tag - DotFirstTag100] integerValue], [self.delegate popUpSuffixForlineGraph:self index:index]];
     else
         self.popUpLabel.text = [NSString stringWithFormat:@"%li", (long)[dataPoints[(NSInteger) closestDot.tag - DotFirstTag100] integerValue]];
     
@@ -1427,11 +1432,11 @@ typedef NS_ENUM(NSInteger, BEMInternalTags)
         } completion:nil];
         NSString *prefix = @"";
         NSString *suffix = @"";
-        if ([self.delegate respondsToSelector:@selector(popUpSuffixForlineGraph:)]) {
-            suffix = [self.delegate popUpSuffixForlineGraph:self];
+        if ([self.delegate respondsToSelector:@selector(popUpSuffixForlineGraph:index:)]) {
+            suffix = [self.delegate popUpSuffixForlineGraph:self index:index];
         }
-        if ([self.delegate respondsToSelector:@selector(popUpPrefixForlineGraph:)]) {
-            prefix = [self.delegate popUpPrefixForlineGraph:self];
+        if ([self.delegate respondsToSelector:@selector(popUpPrefixForlineGraph:index:)]) {
+            prefix = [self.delegate popUpPrefixForlineGraph:self index:index];
         }
         NSNumber *value = dataPoints[index];
         NSString *formattedValue = [NSString stringWithFormat:self.formatStringForValues, value.doubleValue];
