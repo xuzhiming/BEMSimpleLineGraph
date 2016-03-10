@@ -24,7 +24,7 @@ const CGFloat BEMNullGraphValue = CGFLOAT_MAX;
 typedef NS_ENUM(NSInteger, BEMInternalTags)
 {
     DotFirstTag100 = 100,
-    DotLastTag1000 = 10000,
+    DotLastTag1000 = 1000,
     LabelYAxisTag2000 = 2000,
     BackgroundYAxisTag2100 = 2100,
     BackgroundXAxisTag2200 = 2200,
