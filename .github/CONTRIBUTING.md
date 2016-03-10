@@ -24,11 +24,22 @@ The best way to contribute changes (e.g. a great idea, a new feature, bug fixes,
 
 1. Fork this repository and clone that fork onto your computer.  
 2. Make changes to the forked repo, fix any errors, debug.  
-3. Commit and then push all the changes up to your forked GitHub repo.  
-4. Submit a pull request from your forked GitHub repo into the main repo. Make sure to detail what changes you made in the pull request.  
+3. Commit and then push all the changes up to your forked GitHub repo. 
+4. Choose a branch on the main repository to merge your changes into. If you're unsure, check below for which branch to merge with.  
+      - **Master Branch**: Your changes are non-breaking project updates, README changes, documentation updates, bug fixes, and minor improvements. Generally, any non-breaking major changes should be submitted to this branch.  
+      - **Feature Branch**: Your forked changes are either major project updates / changes, or breaking changes. Because of semantic versioning and API vavailability, any changes to public API availability or behavior should be submitted to this branch.  
+5. Submit a pull request from your forked GitHub repo into the main repo. Make sure to detail what changes you made in the pull request.  
 
 #### Code Guidelines
 Before submitting any code changes, read over the code / syntax guidelines to make sure everything you write matches the appropriate coding style. The [Objective-C Coding Guidelines](https://github.com/github/objective-c-conventions) are available on GitHub.
+
+#### Versioning Guidelines
+It is crucial that all contributions to this project adhere to [semantic versioning](http://semver.org). Ther version format should always follow the X.Y.Z format. Breaking changes to the public API increment the X value. Internal changes, API deprecation, bug fixes, etc. warrant an increment to the Y value. Bug fixes, patches, documentation updates, etc. are cause for an increment to the Z value.
+
+Removing old APIs should use the following process:  
+ 1. Deprecate the API, update documentation, and provide internal support and warnings for the deprecated API (so as to alert developers and to smoothly transition to new APIs without cause errors or bugs).  
+ 2. Release a new minor version including the deprecated API  
+ 3. When the next major version is released, remove the API entirely. Reflect the changes in the documentation.
 
 #### Documentation Guidelines
 Document the changes you make. Only fundamental documentation is written in the `Readme.md` (e.g. setup, installation, data source, and delegation). Full documentation is written on the [wiki](https://github.com/Boris-Em/BEMSimpleLineGraph/wiki). There's a lot of work left to do on the [wiki](https://github.com/Boris-Em/BEMSimpleLineGraph/wiki), and any help **writing documentation for the wiki is greatly appreciated**.
