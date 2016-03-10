@@ -51,11 +51,11 @@ typedef NS_ENUM(NSInteger, BEMInternalTags)
     return xAxisLabelString;
 }
 
-- (NSString *)popUpPrefixForlineGraph:(BEMSimpleLineGraphView * __nonnull)graph {
+- (NSString *)popUpPrefixForlineGraph:(BEMSimpleLineGraphView * __nonnull)graph index:(NSUInteger)index{
     return popUpPrefix;
 }
 
-- (NSString *)popUpSuffixForlineGraph:(BEMSimpleLineGraphView * __nonnull)graph {
+- (NSString *)popUpSuffixForlineGraph:(BEMSimpleLineGraphView * __nonnull)graph index:(NSUInteger)index{
     return popUpSuffix;
 }
 

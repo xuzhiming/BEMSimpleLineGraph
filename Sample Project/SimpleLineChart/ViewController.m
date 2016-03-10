@@ -240,7 +240,7 @@
     // Use this method for tasks after the graph has finished drawing
 } */
 
-- (NSString *)popUpSuffixForlineGraph:(BEMSimpleLineGraphView *)graph {
+- (NSString *)popUpSuffixForlineGraph:(BEMSimpleLineGraphView *)graph index:(NSUInteger)index{
     return @" people";
 }
 
